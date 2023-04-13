@@ -1,0 +1,5 @@
+.element__like_active {
+    opacity: 1;
+    background: url('./element__like_active.svg');
+    transition: opacity 0.1s linear;
+}

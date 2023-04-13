@@ -1,0 +1,11 @@
+.form__field {
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+    max-width: 100%;
+}
+
+.form__field:last-of-type {
+    margin-bottom: 0px;
+}

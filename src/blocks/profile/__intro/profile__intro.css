@@ -1,0 +1,18 @@
+.profile__intro {
+    grid-area: intro;
+    margin: 0;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+@media screen and (max-width: 768px) {
+    .profile__intro {
+        font-size: 14px;
+        line-height: 17px;
+        text-align: center;
+    }
+}

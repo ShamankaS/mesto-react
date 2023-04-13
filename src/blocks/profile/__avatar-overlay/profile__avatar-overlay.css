@@ -1,0 +1,12 @@
+.profile__avatar-overlay {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+.profile__avatar-overlay:hover {
+    background: no-repeat center url('./profile__avatar-overlay_vector.svg'), rgba(0, 0, 0, 0.8);
+    cursor: pointer;
+}

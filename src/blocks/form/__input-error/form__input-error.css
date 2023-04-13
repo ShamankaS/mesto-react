@@ -1,0 +1,5 @@
+.form__input-error {
+    position: relative;
+    top: calc(100% + 5px);
+    min-height: 30px;
+}

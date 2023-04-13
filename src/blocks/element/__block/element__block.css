@@ -1,0 +1,7 @@
+.element__block {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 25px 20px 18px 21px;
+    max-width: 246px;
+}

@@ -1,0 +1,9 @@
+.popup__container_type_form {
+    width: 430px;
+}
+
+@media screen and (max-width: 581px) {
+    .popup__container_type_form {
+        width: 282px;
+    }
+}

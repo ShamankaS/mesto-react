@@ -1,0 +1,21 @@
+.profile__info {
+    display: inline-grid;
+    grid-template-areas: 'name button'
+        'intro intro';
+    column-gap: 18px;
+    grid-template-rows: repeat(2, min-content);
+    grid-template-columns: fit-content(508px) auto;
+    row-gap: 8px;
+    margin-top: 22px;
+    margin-left: 30px;
+}
+
+@media screen and (max-width: 768px) {
+    .profile__info {
+        margin-left: 0;
+        column-gap: 10px;
+        grid-template-columns: 18px fit-content(508px) 18px;
+        grid-template-areas: '. name button'
+            'intro intro intro';
+    }
+}
