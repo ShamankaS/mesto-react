@@ -1,13 +1,15 @@
-.elements {
+.elements__items {
     display: grid;
     grid-template-columns: repeat(3, 282px);
     column-gap: 17px;
     grid-template-rows: repeat(auto-fit, 362px);
     row-gap: 20px;
+    list-style-type: none;
+    margin: 0;
 }
 
 @media screen and (max-width: 880px) {
-    .elements {
+    .elements__items {
         margin: 0 19px;
         grid-template-columns: repeat(2, 282px);
         justify-content: center;
@@ -15,7 +17,7 @@
 }
 
 @media screen and (max-width: 581px) {
-    .elements {
+    .elements__items {
         grid-template-columns: repeat(1, 282px);
     }
 }
