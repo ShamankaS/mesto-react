@@ -1,4 +1,6 @@
-export default function PopupWithForm({ name, title, children, btnTxt, isOpen, onClose, ref }) {
+import React from 'react';
+
+export default function PopupWithForm({ name, title, children, btnTxt, isOpen, onClose }) {
   return (
     <div className={isOpen ? `popup popup_type_${name} popup_active` : `popup popup_type_${name}`}>
       <div className="popup__container popup__container_type_form">

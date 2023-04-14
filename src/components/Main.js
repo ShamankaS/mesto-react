@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import {api} from '../utils/Api.js';
 
 export default function Main({ onEditProfile, onAddPlace, onEditAvatar}) {
