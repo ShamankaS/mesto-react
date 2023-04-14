@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Header from './Header.js';
 import Main from './Main.js';
 import Footer from './Footer.js';
@@ -27,23 +27,37 @@ export default function App() {
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
   }
+
+  const mouseEventType = 'click';
   const keyNameEsc = 'Escape';
   const keyEventType = 'keydown';
+  const openPopupSelector = 'popup_active';
 
-  const handleEscKey = React.useCallback((evt) => {
+  const handleEscKey = (evt) => {
     if (evt.key === keyNameEsc) {
       closeAllPopups();
     }
-  }, [closeAllPopups]);
+  };
+
+  const handleClickOutside = (evt) => {
+    if (evt.target.classList.contains(openPopupSelector)) {
+      closeAllPopups();
+    }
+  };
 
   React.useEffect(() => {
-    document.addEventListener(keyEventType, handleEscKey, false);
-    return (() => {
-      document.removeEventListener(keyEventType, handleEscKey, false);
-    })
-  }, [handleEscKey]);
+    document.addEventListener(keyEventType, handleEscKey, true);
+    return () => {
+      document.removeEventListener(keyEventType, handleEscKey, true);
+    }
+  });
 
-
+  React.useEffect(() => {
+    document.addEventListener(mouseEventType, handleClickOutside, true);
+    return () => {
+      document.removeEventListener(mouseEventType, handleClickOutside, true);
+    };
+  });
 
   return (
     <div className="body">
