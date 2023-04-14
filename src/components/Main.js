@@ -12,7 +12,7 @@ export default function Main({ onEditProfile, onAddPlace, onEditAvatar }) {
           <div className="profile__info">
             <h1 className="profile__name">Жак-Ив Кусто</h1>
             <button className="profile__edit-button" type="button" onClick={onEditProfile}></button>
-            <p className="profile__intro">Исследователь океана</p>
+            <p className="profile__about">Исследователь океана</p>
           </div>
         </div>
         <button className="profile__add-button" type="button" onClick={onAddPlace}></button>

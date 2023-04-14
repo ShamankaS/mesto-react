@@ -1,4 +1,4 @@
-.profile__intro {
+.profile__about {
     grid-area: intro;
     margin: 0;
     font-weight: 400;
@@ -10,7 +10,7 @@
 }
 
 @media screen and (max-width: 768px) {
-    .profile__intro {
+    .profile__about {
         font-size: 14px;
         line-height: 17px;
         text-align: center;

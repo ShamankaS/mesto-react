@@ -75,14 +75,14 @@ export default function App() {
           children={
             <>
               <label className="form__field">
-                <input className="form__input" id="input_type_name" placeholder="Имя" name="fullname" required
+                <input className="form__input" id="input_type_name" placeholder="Имя" name="name" required
                   minLength="2" maxLength="40" />
                 <span className="form__input-error" id="error-input_type_name" name="error-input_type_name"></span>
               </label>
               <label className="form__field">
-                <input className="form__input" id="input_type_intro" placeholder="О себе" name="job" required
+                <input className="form__input" id="input_type_about" placeholder="О себе" name="about" required
                   minLength="2" maxLength="200" />
-                <span className="form__input-error" id="error-input_type_intro" name="error-input_type_intro"></span>
+                <span className="form__input-error" id="error-input_type_about" name="error-input_type_about"></span>
               </label>
             </>
           }
@@ -96,7 +96,7 @@ export default function App() {
           children={
             <>
               <label className="form__field">
-                <input className="form__input" id="input_type_title" placeholder="Название" name="name" required
+                <input className="form__input" id="input_type_title" placeholder="Название" name="title" required
                   minLength="2" maxLength="30" />
                 <span className="form__input-error" id="error-input_type_title"></span>
               </label>
@@ -117,9 +117,9 @@ export default function App() {
           children={
             <>
               <label className="form__field">
-                <input className="form__input" id="input_type_img-link" placeholder="Ссылка на изображение"
+                <input className="form__input" id="input_type_avatar" placeholder="Ссылка на изображение"
                   name="avatar" required type="url" />
-                <span className="form__input-error" id="error-input_type_img-link"></span>
+                <span className="form__input-error" id="error-input_type_avatar"></span>
               </label>
             </>
           }
