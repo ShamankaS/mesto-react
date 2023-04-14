@@ -4,6 +4,7 @@ import Main from './Main.js';
 import Footer from './Footer.js';
 import ImagePopup from './ImagePopup.js';
 import PopupWithForm from './PopupWithForm.js';
+import {api} from '../utils/Api.js';
 
 export default function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
@@ -59,6 +60,23 @@ export default function App() {
     };
   });
 
+  const [userInfo, setUserInfo] = React.useState({});
+
+  const fetchData = async() => {
+    try {
+      const profileData = await api.getUserInfo();
+      setUserInfo(profileData);
+      console.log(profileData);
+    } catch (evt) {
+      console.warn(evt);
+    }
+  };
+
+  React.useEffect(() => {
+    fetchData();
+  }, []);
+
+
   return (
     <div className="body">
       <div className="page">
@@ -67,6 +85,7 @@ export default function App() {
           onEditProfile={handleEditProfileClick}
           onAddPlace={handleAddPlaceClick}
           onEditAvatar={handleEditAvatarClick}
+          userInfo={userInfo}
         />
         <Footer />
         <PopupWithForm
