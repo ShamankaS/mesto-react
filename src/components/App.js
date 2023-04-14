@@ -1,14 +1,17 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './Header.js';
 import Main from './Main.js';
 import Footer from './Footer.js';
 import ImagePopup from './ImagePopup.js';
 import PopupWithForm from './PopupWithForm.js';
 
+
 export default function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+  const [isCardPopupOpen, setIsCardPopupOpen] = React.useState(false);
+  const [selectedCard, setSelectedCard] = React.useState({});
 
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
@@ -26,24 +29,44 @@ export default function App() {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
+    setIsCardPopupOpen(false);
   }
+
+  const mouseEventType = 'click';
   const keyNameEsc = 'Escape';
   const keyEventType = 'keydown';
+  const openPopupSelector = 'popup_active';
 
-  const handleEscKey = React.useCallback((evt) => {
+  const handleEscKey = (evt) => {
     if (evt.key === keyNameEsc) {
       closeAllPopups();
     }
-  }, [closeAllPopups]);
+  };
+
+  const handleClickOutside = (evt) => {
+    if (evt.target.classList.contains(openPopupSelector)) {
+      closeAllPopups();
+    }
+  };
 
   React.useEffect(() => {
-    document.addEventListener(keyEventType, handleEscKey, false);
-    return (() => {
-      document.removeEventListener(keyEventType, handleEscKey, false);
-    })
-  }, [handleEscKey]);
+    document.addEventListener(keyEventType, handleEscKey, true);
+    return () => {
+      document.removeEventListener(keyEventType, handleEscKey, true);
+    }
+  });
 
+  React.useEffect(() => {
+    document.addEventListener(mouseEventType, handleClickOutside, true);
+    return () => {
+      document.removeEventListener(mouseEventType, handleClickOutside, true);
+    };
+  });
 
+  const handleCardClick = (data) => {
+    setIsCardPopupOpen(true);
+    setSelectedCard(data);
+  }
 
   return (
     <div className="body">
@@ -53,22 +76,23 @@ export default function App() {
           onEditProfile={handleEditProfileClick}
           onAddPlace={handleAddPlaceClick}
           onEditAvatar={handleEditAvatarClick}
+          onCardClick={handleCardClick}
         />
         <Footer />
         <PopupWithForm
-          name='profile'
-          title='Редактировать профиль'
+          name={'profile'}
+          title={'Редактировать профиль'}
           children={
             <>
               <label className="form__field">
-                <input className="form__input" id="input_type_name" placeholder="Имя" name="fullname" required
+                <input className="form__input" id="input_type_name" placeholder="Имя" name="name" required
                   minLength="2" maxLength="40" />
                 <span className="form__input-error" id="error-input_type_name" name="error-input_type_name"></span>
               </label>
               <label className="form__field">
-                <input className="form__input" id="input_type_intro" placeholder="О себе" name="job" required
+                <input className="form__input" id="input_type_about" placeholder="О себе" name="about" required
                   minLength="2" maxLength="200" />
-                <span className="form__input-error" id="error-input_type_intro" name="error-input_type_intro"></span>
+                <span className="form__input-error" id="error-input_type_about" name="error-input_type_about"></span>
               </label>
             </>
           }
@@ -77,12 +101,12 @@ export default function App() {
           onClose={closeAllPopups}
         />
         <PopupWithForm
-          name='card'
-          title='Новое место'
+          name={'card'}
+          title={'Новое место'}
           children={
             <>
               <label className="form__field">
-                <input className="form__input" id="input_type_title" placeholder="Название" name="name" required
+                <input className="form__input" id="input_type_title" placeholder="Название" name="title" required
                   minLength="2" maxLength="30" />
                 <span className="form__input-error" id="error-input_type_title"></span>
               </label>
@@ -93,24 +117,29 @@ export default function App() {
               </label>
             </>
           }
-          btnTxt='Создать'
+          btnTxt={'Создать'}
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
         />
         <PopupWithForm
-          name='avatar'
-          title='Обновить аватар'
+          name={'avatar'}
+          title={'Обновить аватар'}
           children={
             <>
               <label className="form__field">
-                <input className="form__input" id="input_type_img-link" placeholder="Ссылка на изображение"
+                <input className="form__input" id="input_type_avatar" placeholder="Ссылка на изображение"
                   name="avatar" required type="url" />
-                <span className="form__input-error" id="error-input_type_img-link"></span>
+                <span className="form__input-error" id="error-input_type_avatar"></span>
               </label>
             </>
           }
-          btnTxt='Сохранить'
+          btnTxt={'Сохранить'}
           isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
+        />
+        <ImagePopup
+          card={selectedCard}
+          isOpen={isCardPopupOpen}
           onClose={closeAllPopups}
         />
       </div>

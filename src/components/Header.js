@@ -1,3 +1,4 @@
+import React from 'react';
 import logoPath from '../blocks/header/__logo/header__logo.svg';
 
 export default function Header() {

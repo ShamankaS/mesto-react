@@ -12,9 +12,9 @@
 @import url('./blocks/profile/__avatar-overlay/profile__avatar-overlay.css');
 @import url('./blocks/profile/__avatar/profile__avatar.css');
 @import url('./blocks/profile/__info/profile__info.css');
-@import url('./blocks/profile/__intro/profile__intro.css');
+@import url('./blocks/profile/__about/profile__about.css');
 @import url('./blocks/profile/__name/profile__name.css');
-@import url('./blocks/elements/elements.css');
+@import url('./blocks/elements/__items/elements__items.css');
 @import url('./blocks/element/element.css');
 @import url('./blocks/element/__image/element__image.css');
 @import url('./blocks/element/__title/element__title.css');
