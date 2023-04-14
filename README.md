@@ -3,6 +3,8 @@ This project is a porting of the [Project: Mesto](https://github.com/ShamankaS/m
 
 Full features of this web-site you can find on [README](https://github.com/ShamankaS/mesto#readme).
 
+[Link on GitHub Pages](https://shamankas.github.io/mesto-react/)
+
 ## Project
 * HTML
 * CSS
