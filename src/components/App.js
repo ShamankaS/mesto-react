@@ -4,7 +4,7 @@ import Main from './Main.js';
 import Footer from './Footer.js';
 import ImagePopup from './ImagePopup.js';
 import PopupWithForm from './PopupWithForm.js';
-import {api} from '../utils/Api.js';
+
 
 export default function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
@@ -60,23 +60,6 @@ export default function App() {
     };
   });
 
-  const [userInfo, setUserInfo] = React.useState({});
-
-  const fetchData = async() => {
-    try {
-      const profileData = await api.getUserInfo();
-      setUserInfo(profileData);
-      console.log(profileData);
-    } catch (evt) {
-      console.warn(evt);
-    }
-  };
-
-  React.useEffect(() => {
-    fetchData();
-  }, []);
-
-
   return (
     <div className="body">
       <div className="page">
@@ -85,12 +68,11 @@ export default function App() {
           onEditProfile={handleEditProfileClick}
           onAddPlace={handleAddPlaceClick}
           onEditAvatar={handleEditAvatarClick}
-          userInfo={userInfo}
         />
         <Footer />
         <PopupWithForm
-          name='profile'
-          title='Редактировать профиль'
+          name={'profile'}
+          title={'Редактировать профиль'}
           children={
             <>
               <label className="form__field">
@@ -110,8 +92,8 @@ export default function App() {
           onClose={closeAllPopups}
         />
         <PopupWithForm
-          name='card'
-          title='Новое место'
+          name={'card'}
+          title={'Новое место'}
           children={
             <>
               <label className="form__field">
@@ -126,13 +108,13 @@ export default function App() {
               </label>
             </>
           }
-          btnTxt='Создать'
+          btnTxt={'Создать'}
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
         />
         <PopupWithForm
-          name='avatar'
-          title='Обновить аватар'
+          name={'avatar'}
+          title={'Обновить аватар'}
           children={
             <>
               <label className="form__field">
@@ -142,7 +124,7 @@ export default function App() {
               </label>
             </>
           }
-          btnTxt='Сохранить'
+          btnTxt={'Сохранить'}
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
         />
