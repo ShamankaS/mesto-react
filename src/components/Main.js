@@ -3,10 +3,10 @@ import { api } from '../utils/Api.js';
 import Card from './Card.js';
 
 export default function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
-  const [userName, setUserName] = React.useState('');
-  const [userDescription, setUserDescription] = React.useState('');
-  const [userAvatar, setUserAvatar] = React.useState('');
-  const [cards, setCards] = React.useState([]);
+  const [userName, setUserName] = useState('');
+  const [userDescription, setUserDescription] = useState('');
+  const [userAvatar, setUserAvatar] = useState('');
+  const [cards, setCards] = useState([]);
 
   const fetchData = async () => {
     try {
@@ -28,7 +28,7 @@ export default function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardCl
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     fetchData();
     fetchCards();
   }, []);
