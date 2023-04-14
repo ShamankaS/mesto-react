@@ -9,5 +9,5 @@ Full features of this web-site you can find on [README](https://github.com/Shama
 * HTML
 * CSS
 * JavaScript
-* React
+* React.js
 * This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
