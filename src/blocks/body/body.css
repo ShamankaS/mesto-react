@@ -1,12 +1,12 @@
-.body {
-    background: #000000;
-    font-family: 'Inter', sans-serif;
-    font-style: normal;
-    font-size: 0px;
-    color: #FFFFFF;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-text-size-adjust: 100%;
-    text-size-adjust: 100%;
+body {
+  background: #000000;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-size: 0px;
+  color: #FFFFFF;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }

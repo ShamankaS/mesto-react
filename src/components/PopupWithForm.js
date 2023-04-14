@@ -8,7 +8,7 @@ export default function PopupWithForm({ name, title, children, btnTxt, isOpen, o
         <h2 className="popup__title">{title}</h2>
         <form className="popup__form form" name={name} noValidate>
           {children}
-          <button type="submit" className="form__submit" disabled>{btnTxt}</button>
+          <button type="submit" className="form__submit" disabled>{btnTxt || 'Сохранить'}</button>
         </form>
       </div>
     </div>
