@@ -10,6 +10,8 @@ export default function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+  const [isCardPopupOpen, setIsCardPopupOpen] = React.useState(false);
+  const [selectedCard, setSelectedCard] = React.useState({});
 
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
@@ -27,6 +29,7 @@ export default function App() {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
+    setIsCardPopupOpen(false);
   }
 
   const mouseEventType = 'click';
@@ -60,6 +63,11 @@ export default function App() {
     };
   });
 
+  const handleCardClick = (data) => {
+    setIsCardPopupOpen(true);
+    setSelectedCard(data);
+  }
+
   return (
     <div className="body">
       <div className="page">
@@ -68,6 +76,7 @@ export default function App() {
           onEditProfile={handleEditProfileClick}
           onAddPlace={handleAddPlaceClick}
           onEditAvatar={handleEditAvatarClick}
+          onCardClick={handleCardClick}
         />
         <Footer />
         <PopupWithForm
@@ -126,6 +135,11 @@ export default function App() {
           }
           btnTxt={'Сохранить'}
           isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
+        />
+        <ImagePopup
+          card={selectedCard}
+          isOpen={isCardPopupOpen}
           onClose={closeAllPopups}
         />
       </div>
