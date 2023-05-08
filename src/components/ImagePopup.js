@@ -1,8 +1,10 @@
 import React from 'react';
 
 export default function ImagePopup({ card, isOpen, onClose }) {
+  const imagePopupClassName = (`popup popup_type_picture ${isOpen && 'popup_active'}`);
+
   return (
-    <div className={`popup popup_type_picture ${isOpen ? 'popup_active' : null}`}>
+    <div className={imagePopupClassName}>
       <div className="popup__container popup__container_type_picture">
         <button className="popup__close-button" type="button" onClick={onClose}></button>
         <figure className="popup__figure">

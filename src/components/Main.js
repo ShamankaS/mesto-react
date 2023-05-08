@@ -1,24 +1,9 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { api } from '../utils/Api.js';
+import React, { useContext } from 'react';
 import Card from './Card.js';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 
-export default function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
-  const [cards, setCards] = useState([]);
+export default function Main({ cards, onEditProfile, onAddPlace, onEditAvatar, onCardClick, onCardLike }) {
   const currentUser = useContext(CurrentUserContext);
-
-  const fetchCards = async () => {
-    try {
-      const res = await api.getInitialCards();
-      setCards(res);
-    } catch (evt) {
-      console.warn(evt);
-    }
-  };
-
-  useEffect(() => {
-    fetchCards();
-  }, []);
 
   return (
     <main className="main">
@@ -44,6 +29,7 @@ export default function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardCl
                 card={item}
                 key={item._id}
                 onCardClick={onCardClick}
+                onCardLike={onCardLike}
               />
             ))
           }

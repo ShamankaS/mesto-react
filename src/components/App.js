@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import { api } from '../utils/Api.js';
 import Header from './Header.js';
 import Main from './Main.js';
@@ -6,7 +6,7 @@ import Footer from './Footer.js';
 import ImagePopup from './ImagePopup.js';
 import PopupWithForm from './PopupWithForm.js';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
-
+// import EditProfilePopup from './EditProfilePopup.js';
 
 export default function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
@@ -15,18 +15,31 @@ export default function App() {
   const [isCardPopupOpen, setIsCardPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState({});
   const [currentUser, setCurrentUser] = useState({});
+  const [cards, setCards] = useState([]);
 
   const fetchData = async () => {
     try {
       const res = await api.getUserInfo();
       setCurrentUser(res);
+      console.log(res);
     } catch (evt) {
       console.log(evt);
     }
   };
 
+  const fetchCards = async () => {
+    try {
+      const res = await api.getInitialCards();
+      setCards(res);
+      console.log(res);
+    } catch (evt) {
+      console.warn(evt);
+    }
+  };
+
   useEffect(() => {
     fetchData();
+    fetchCards();
   }, []);
 
   function handleEditProfileClick() {
@@ -46,7 +59,7 @@ export default function App() {
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
     setIsCardPopupOpen(false);
-  }
+  };
 
   const mouseEventType = 'click';
   const keyNameEsc = 'Escape';
@@ -66,6 +79,7 @@ export default function App() {
   };
 
   const anyPopupOpen = isAddPlacePopupOpen || isCardPopupOpen || isEditAvatarPopupOpen || isEditProfilePopupOpen;
+
   useEffect(() => {
     if (anyPopupOpen) {
       document.addEventListener(keyEventType, handleEscKey, true);
@@ -80,19 +94,46 @@ export default function App() {
   const handleCardClick = (data) => {
     setIsCardPopupOpen(true);
     setSelectedCard(data);
-  }
+  };
+
+  const handleCardLikeClick = async (card) => {
+    const isLiked = card.likes.some(item => item._id === currentUser._id);
+    try {
+      const res = await api.changeLikeCardStatus(card, !isLiked);
+      setCards((state) => state.map(item => item._id === card._id ? res : item));
+    } catch (error) {
+      console.warn(error);
+    }
+  };
+
+  // const handleDeleteClick = async (card) => {
+  //   try {
+  //     await api.deleteCard(card._id);
+  //     setCards(cards => cards.filter((c) => c._id !== card._id));
+  //     closeAllPopups();
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <Header />
         <Main
+          cards={cards}
           onEditProfile={handleEditProfileClick}
           onAddPlace={handleAddPlaceClick}
           onEditAvatar={handleEditAvatarClick}
-          onCardClick={handleCardClick} />
+          onCardClick={handleCardClick}
+          onCardLike={handleCardLikeClick} />
         <Footer />
-        <PopupWithForm
+        {/* <EditProfilePopup
+          isOpen={isEditProfilePopupOpen}
+          onClose={closeAllPopups}
+        /> */}
+
+        {/* <PopupWithForm
           name={'profile'}
           title={'Редактировать профиль'}
           isOpen={isEditProfilePopupOpen}
@@ -107,7 +148,7 @@ export default function App() {
               minLength="2" maxLength="200" />
             <span className="form__input-error" id="error-input_type_about" name="error-input_type_about"></span>
           </label>
-        </PopupWithForm>
+        </PopupWithForm> */}
         <PopupWithForm
           name={'card'}
           title={'Новое место'}
