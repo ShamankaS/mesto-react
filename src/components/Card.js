@@ -9,15 +9,15 @@ export default function Card({ card, onCardClick, onCardDelete, onCardLike }) {
 
   const handleCardClick = () => {
     onCardClick(card);
-  }
+  };
 
   const handleDeleteClick = () => {
     onCardDelete(card._id);
-  }
+  };
 
   const handleLikeClick = () => {
     onCardLike(card);
-  }
+  };
 
   return (
     <li className="element">

@@ -22,8 +22,8 @@ export default function App() {
       const res = await api.getUserInfo();
       setCurrentUser(res);
       console.log(res);
-    } catch (evt) {
-      console.log(evt);
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -32,8 +32,8 @@ export default function App() {
       const res = await api.getInitialCards();
       setCards(res);
       console.log(res);
-    } catch (evt) {
-      console.warn(evt);
+    } catch (error) {
+      console.warn(error);
     }
   };
 
@@ -116,6 +116,16 @@ export default function App() {
   //   }
   // }
 
+  const handleUpdateUser = async (data) => {
+    try {
+      const res = await api.setUserInfo(data);
+      setCurrentUser(res);
+      closeAllPopups();
+    } catch (error) {
+      console.warn(error);
+    }
+  };
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
@@ -131,7 +141,7 @@ export default function App() {
         <EditProfilePopup
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
-        />
+          onUpdateUser={handleUpdateUser} />
 
         {/* <PopupWithForm
           name={'profile'}

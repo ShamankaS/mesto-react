@@ -29,8 +29,7 @@ export default function Main({ cards, onEditProfile, onAddPlace, onEditAvatar, o
                 card={item}
                 key={item._id}
                 onCardClick={onCardClick}
-                onCardLike={onCardLike}
-              />
+                onCardLike={onCardLike} />
             ))
           }
         </ul>
