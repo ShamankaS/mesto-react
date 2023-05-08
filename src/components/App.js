@@ -8,6 +8,7 @@ import PopupWithForm from './PopupWithForm.js';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 import EditProfilePopup from './EditProfilePopup.js';
 import EditAvatarPopup from './EditAvatarPopup.js';
+import AddPlacePopup from './AddPlacePopup.js';
 
 export default function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
@@ -137,6 +138,16 @@ export default function App() {
     }
   };
 
+  const handleAddPlaceSubmit = async (data) => {
+    try {
+      const res = await api.addNewCard(data);
+      setCards([res, ...cards]);
+      closeAllPopups();
+    } catch (error) {
+      console.warn(error);
+    }
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
@@ -153,23 +164,10 @@ export default function App() {
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
           onUpdateUser={handleUpdateUser} />
-        <PopupWithForm
-          name={'card'}
-          title={'Новое место'}
-          btnTxt={'Создать'}
+        <AddPlacePopup
           isOpen={isAddPlacePopupOpen}
-          onClose={closeAllPopups}>
-          <label className="form__field">
-            <input className="form__input" id="input_type_title" placeholder="Название" name="title" required
-              minLength="2" maxLength="30" />
-            <span className="form__input-error" id="error-input_type_title"></span>
-          </label>
-          <label className="form__field">
-            <input className="form__input" id="input_type_link" placeholder="Ссылка на картинку" name="link"
-              required type="url" />
-            <span className="form__input-error" id="error-input_type_link"></span>
-          </label>
-        </PopupWithForm>
+          onClose={closeAllPopups}
+          onAddPlace={handleAddPlaceSubmit} />
         <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
