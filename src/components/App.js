@@ -7,6 +7,7 @@ import ImagePopup from './ImagePopup.js';
 import PopupWithForm from './PopupWithForm.js';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 import EditProfilePopup from './EditProfilePopup.js';
+import EditAvatarPopup from './EditAvatarPopup.js';
 
 export default function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
@@ -126,6 +127,16 @@ export default function App() {
     }
   };
 
+  const handleUpdateAvatar = async (data) => {
+    try {
+      const res = await api.changeAvatar(data);
+      setCurrentUser(res);
+      closeAllPopups();
+    } catch (error) {
+      console.warn(error);
+    }
+  };
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
@@ -142,23 +153,6 @@ export default function App() {
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
           onUpdateUser={handleUpdateUser} />
-
-        {/* <PopupWithForm
-          name={'profile'}
-          title={'Редактировать профиль'}
-          isOpen={isEditProfilePopupOpen}
-          onClose={closeAllPopups}>
-          <label className="form__field">
-            <input className="form__input" id="input_type_name" placeholder="Имя" name="name" required
-              minLength="2" maxLength="40" />
-            <span className="form__input-error" id="error-input_type_name" name="error-input_type_name"></span>
-          </label>
-          <label className="form__field">
-            <input className="form__input" id="input_type_about" placeholder="О себе" name="about" required
-              minLength="2" maxLength="200" />
-            <span className="form__input-error" id="error-input_type_about" name="error-input_type_about"></span>
-          </label>
-        </PopupWithForm> */}
         <PopupWithForm
           name={'card'}
           title={'Новое место'}
@@ -176,17 +170,10 @@ export default function App() {
             <span className="form__input-error" id="error-input_type_link"></span>
           </label>
         </PopupWithForm>
-        <PopupWithForm
-          name={'avatar'}
-          title={'Обновить аватар'}
+        <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}
-          onClose={closeAllPopups}>
-          <label className="form__field">
-            <input className="form__input" id="input_type_avatar" placeholder="Ссылка на изображение"
-              name="avatar" required type="url" />
-            <span className="form__input-error" id="error-input_type_avatar"></span>
-          </label>
-        </PopupWithForm>
+          onClose={closeAllPopups}
+          onUpdateAvatar={handleUpdateAvatar} />
         <ImagePopup
           card={selectedCard}
           isOpen={isCardPopupOpen}
