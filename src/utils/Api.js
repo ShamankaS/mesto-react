@@ -70,6 +70,11 @@ class Api {
         return this._handleResponse(res);
     }
 
+    changeLikeCardStatus(card, variable) {
+        this._status = variable ? this.like(card._id) : this.dislike(card._id);
+        return this._status;
+    }
+
     async changeAvatar(data) {
         const res = await fetch(`${this._url}/users/me/avatar`, {
             method: 'PATCH',
