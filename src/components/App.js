@@ -4,7 +4,6 @@ import Header from './Header.js';
 import Main from './Main.js';
 import Footer from './Footer.js';
 import ImagePopup from './ImagePopup.js';
-import PopupWithForm from './PopupWithForm.js';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 import EditProfilePopup from './EditProfilePopup.js';
 import EditAvatarPopup from './EditAvatarPopup.js';
@@ -23,7 +22,6 @@ export default function App() {
     try {
       const res = await api.getUserInfo();
       setCurrentUser(res);
-      console.log(res);
     } catch (error) {
       console.log(error);
     }
@@ -33,7 +31,6 @@ export default function App() {
     try {
       const res = await api.getInitialCards();
       setCards(res);
-      console.log(res);
     } catch (error) {
       console.warn(error);
     }
@@ -108,15 +105,15 @@ export default function App() {
     }
   };
 
-  // const handleDeleteClick = async (card) => {
-  //   try {
-  //     await api.deleteCard(card._id);
-  //     setCards(cards => cards.filter((c) => c._id !== card._id));
-  //     closeAllPopups();
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
+  const handleCardDelete = async (card) => {
+    try {
+      await api.deleteCard(card._id);
+      setCards((state) => state.filter(item => item._id !== card._id));
+      closeAllPopups();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleUpdateUser = async (data) => {
     try {
@@ -146,7 +143,7 @@ export default function App() {
     } catch (error) {
       console.warn(error);
     }
-  }
+  };
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -158,7 +155,8 @@ export default function App() {
           onAddPlace={handleAddPlaceClick}
           onEditAvatar={handleEditAvatarClick}
           onCardClick={handleCardClick}
-          onCardLike={handleCardLikeClick} />
+          onCardLike={handleCardLikeClick}
+          onCardDelete={handleCardDelete} />
         <Footer />
         <EditProfilePopup
           isOpen={isEditProfilePopupOpen}

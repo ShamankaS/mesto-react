@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import Card from './Card.js';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 
-export default function Main({ cards, onEditProfile, onAddPlace, onEditAvatar, onCardClick, onCardLike }) {
+export default function Main({ cards, onEditProfile, onAddPlace, onEditAvatar, onCardClick, onCardLike, onCardDelete }) {
   const currentUser = useContext(CurrentUserContext);
 
   return (
@@ -29,7 +29,8 @@ export default function Main({ cards, onEditProfile, onAddPlace, onEditAvatar, o
                 card={item}
                 key={item._id}
                 onCardClick={onCardClick}
-                onCardLike={onCardLike} />
+                onCardLike={onCardLike}
+                onCardDelete={onCardDelete} />
             ))
           }
         </ul>
