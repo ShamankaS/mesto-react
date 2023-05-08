@@ -6,7 +6,7 @@ import Footer from './Footer.js';
 import ImagePopup from './ImagePopup.js';
 import PopupWithForm from './PopupWithForm.js';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
-// import EditProfilePopup from './EditProfilePopup.js';
+import EditProfilePopup from './EditProfilePopup.js';
 
 export default function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
@@ -128,10 +128,10 @@ export default function App() {
           onCardClick={handleCardClick}
           onCardLike={handleCardLikeClick} />
         <Footer />
-        {/* <EditProfilePopup
+        <EditProfilePopup
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
-        /> */}
+        />
 
         {/* <PopupWithForm
           name={'profile'}
