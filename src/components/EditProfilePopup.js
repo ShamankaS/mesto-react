@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import PopupWithForm from "./PopupWithForm";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
-export default function EditProdilePopup({ isOpen, onClose, onUpdateUser }) {
+export default function EditProdilePopup({ isOpen, onClose, onUpdateUser, isLoading }) {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
 
@@ -34,7 +34,8 @@ export default function EditProdilePopup({ isOpen, onClose, onUpdateUser }) {
       title={'Редактировать профиль'}
       isOpen={isOpen}
       onClose={onClose}
-      onSubmit={handleSubmit}>
+      onSubmit={handleSubmit}
+      isLoading={isLoading}>
       <label className="form__field">
         <input
           className="form__input"
