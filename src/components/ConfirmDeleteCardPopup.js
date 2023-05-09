@@ -1,11 +1,10 @@
 import React from "react";
 
-
 export default function ConfirmDeleteCardPopup({ card, isOpen, onClose, onSubmit, isLoading }) {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     onSubmit(card);
-  }
+  };
 
   return (
     <div

@@ -17,7 +17,6 @@ export default function PopupWithForm({ name, title, children, btnTxt, isOpen, o
         <form
           className="popup__form form"
           name={name}
-          noValidate
           onSubmit={onSubmit}>
           {children}
           <button

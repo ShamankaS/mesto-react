@@ -18,7 +18,7 @@ export default function EditProdilePopup({ isOpen, onClose, onUpdateUser, isLoad
   useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
-  }, [currentUser]);
+  }, [currentUser, isOpen]);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();

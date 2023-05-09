@@ -59,7 +59,8 @@ export default function App() {
     setIsEditAvatarPopupOpen(true);
   };
 
-  function handleConfirmDeleleCardClick() {
+  function handleConfirmDeleleCardClick(data) {
+    setSelectedCard(data);
     setIsConfirmDeleteCardPopupopen(true);
   }
 
