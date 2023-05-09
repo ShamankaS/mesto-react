@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function PopupWithForm({ name, title, children, btnTxt, isOpen, onClose, onSubmit }) {
+export default function PopupWithForm({ name, title, children, btnTxt, isOpen, onClose, onSubmit, isLoading, btnTxtLoading }) {
   return (
     <div
       className={`popup popup_type_${name} ${isOpen ? 'popup_active' : null}`}>
@@ -17,13 +17,12 @@ export default function PopupWithForm({ name, title, children, btnTxt, isOpen, o
         <form
           className="popup__form form"
           name={name}
-          noValidate
           onSubmit={onSubmit}>
           {children}
           <button
             type="submit"
             className="form__submit">
-            {btnTxt || 'Сохранить'}
+            {isLoading ? (btnTxtLoading || 'Сохранение...') : (btnTxt || 'Сохранить')}
           </button>
         </form>
       </div>
